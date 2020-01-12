@@ -29,12 +29,15 @@ class MoviesFragment : Fragment() {
         retrofitClient
             .getMovieService()
             .getPopularMovies(API_KEY)
-            .enqueue(object : Callback<List<PopularMovies>> {
-                override fun onFailure(call: Call<List<PopularMovies>>, t: Throwable) {
+            .enqueue(object : Callback<PopularMovies> {
+                override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
                     Log.v("TEST", "Failed")
                 }
 
-                override fun onResponse(call: Call<List<PopularMovies>>, response: Response<List<PopularMovies>>) {
+                override fun onResponse(
+                    call: Call<PopularMovies>,
+                    response: Response<PopularMovies>
+                ) {
                     Log.v("TEST", "Success: ${response.body().toString()}")
                 }
             })

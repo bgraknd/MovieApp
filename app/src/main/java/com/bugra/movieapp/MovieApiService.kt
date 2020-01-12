@@ -8,5 +8,5 @@ interface MovieApiService {
     @GET("movie/popular")
     fun getPopularMovies(
         @Query("api_key") apiKey: String
-    ): Call<List<PopularMovies>>
+    ): Call<PopularMovies>
 }
