@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bugra.movieapp.BuildConfig.API_KEY
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class MoviesFragment : Fragment() {
 
-    private val retrofitClient = RetrofitClient()
+    val apiDataSource = ApiDataSource()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,21 +25,27 @@ class MoviesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        retrofitClient
-            .getMovieService()
-            .getPopularMovies(API_KEY)
-            .enqueue(object : Callback<PopularMovies> {
-                override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
-                    Log.v("TEST", "Failed")
-                }
+        fetchMoviePage()
+    }
 
-                override fun onResponse(
-                    call: Call<PopularMovies>,
-                    response: Response<PopularMovies>
-                ) {
-                    Log.v("TEST", "Success: ${response.body().toString()}")
-                }
-            })
+    private fun fetchMoviePage() {
+
+        val popularMoviesObservable = apiDataSource.fetchPopularMovies()
+        val nowPlayingMoviesObservable = apiDataSource.fetchNowPlayingMovies()
+
+        Observable.combineLatest(
+            popularMoviesObservable,
+            nowPlayingMoviesObservable,
+            MoviePageCombiner()
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.v(
+                    "TEST",
+                    it.popularMovies.status.toString() + " " + it.nowPlayingMovies.status.toString()
+                )
+            }
     }
 
     companion object {
