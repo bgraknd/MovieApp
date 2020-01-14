@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bugra.movieapp.databinding.ItemMovieBinding
-import com.bugra.movieapp.model.PopularMovies
+import com.bugra.movieapp.model.PopularMovieResults
+import com.squareup.picasso.Picasso
 
 
 class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItemViewHolder>() {
 
-    private val movieList = arrayListOf<PopularMovies>()
+    private var movieList = arrayListOf<PopularMovieResults>()
 
-    fun setMovieList(movieList: List<PopularMovies>) {
-        this.movieList.clear() //recyclerView daha kullanisli metotlar da iceriyor
-        this.movieList.addAll(movieList)
+    fun setMovieList(movieList: List<PopularMovieResults>) {
+        this.movieList = movieList as ArrayList<PopularMovieResults>
         notifyDataSetChanged()
     }
 
@@ -29,9 +29,9 @@ class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItem
     class MovieItemViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: PopularMovies) {
-            //binding.textView.text = movie.title
-            //Picasso.get().load(movie.poster_path).into(binding.imageViewFilmPoster)
+        fun bind(movie: PopularMovieResults) {
+            binding.txtMovieTitle.text = movie.title
+            Picasso.get().load(movie.poster_path).into(binding.imageViewFilmPoster)
         }
 
         companion object {

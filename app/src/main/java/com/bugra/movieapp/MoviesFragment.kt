@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.bugra.movieapp.Status.LOADING
-import com.bugra.movieapp.Status.SUCCESS
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bugra.movieapp.Status.*
 import com.bugra.movieapp.databinding.FragmentMoviesBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +28,13 @@ class MoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false)
+
+        // added layout manager
+        binding.recyclerViewNowPlaying.layoutManager =
+            LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.recyclerViewPopularMovies.layoutManager =
+            LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
 
         binding.recyclerViewPopularMovies.adapter = popularMoviesAdapter
         binding.recyclerViewNowPlaying.adapter = nowPlayingMoviesAdapter
@@ -65,15 +72,31 @@ class MoviesFragment : Fragment() {
     private fun renderUI(moviesFragmentViewState: MoviesFragmentViewState) {
         when (moviesFragmentViewState.popularMovies.status) {
             SUCCESS -> {
-                popularMoviesAdapter.setMovieList(moviesFragmentViewState.popularMovies.data!!)
+                Log.e(
+                    "Succes Data : ",
+                    moviesFragmentViewState.popularMovies.data!!.results!!.toString()
+                )
+                popularMoviesAdapter.setMovieList(moviesFragmentViewState.popularMovies.data.results!!)
             }
-            LOADING -> TODO()
+            LOADING -> {
+
+            }
+            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.popularMovies.message.toString())
+            else -> Log.e("Else Case : ", "Wrong Section")
         }
         when (moviesFragmentViewState.nowPlayingMovies.status) {
             SUCCESS -> {
-                nowPlayingMoviesAdapter.setMovieList(moviesFragmentViewState.nowPlayingMovies.data!!)
+                Log.e(
+                    "Succes Data : ",
+                    moviesFragmentViewState.nowPlayingMovies.data!!.results!!.toString()
+                )
+                nowPlayingMoviesAdapter.setMovieList(moviesFragmentViewState.nowPlayingMovies.data.results!!)
             }
-            LOADING -> TODO()
+            LOADING -> {
+
+            }
+            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.nowPlayingMovies.message.toString())
+            else -> Log.e("Else Case : ", "Wrong Section")
         }
     }
 
