@@ -1,4 +1,4 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.model
 
 data class PopularMovies(
     var page: Int?,

@@ -1,6 +1,6 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.model
 
-data class PopularMovieResults(
+data class NowPlayingMovieResults(
     var popularity: Float?,
     var vote_count: Int?,
     var video: Boolean?,

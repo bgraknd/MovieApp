@@ -6,6 +6,12 @@
         <item>Series</item>
     </string-array>
 
+    <string name="titlePopularMovies">Popular Movies</string>
+    <string name="titleNowPlayingMovies">Now Playing</string>
+    <string name="titlePopularSeries">Now Playing</string>
+    <string name="titleAiringTodaySeries">Airing Today</string>
+    <string name="titleViewAll">View All > </string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

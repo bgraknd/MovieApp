@@ -1,6 +1,7 @@
 package com.bugra.movieapp
 
 import com.bugra.movieapp.BuildConfig.API_KEY
+import com.bugra.movieapp.model.PopularMovies
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -29,7 +30,9 @@ class ApiDataSource {
         }
     }
 
-    fun fetchNowPlayingMovies(): Observable<Resource<NowPlayingMovies>> {
+    fun fetchNowPlayingMovies(): Observable<Resource<PopularMovies>>
+    //TODO nowPlaying
+    {
         return Observable.create { emitter ->
 
             emitter.onNext(Resource.loading())
@@ -50,15 +53,3 @@ class ApiDataSource {
         }
     }
 }
-
-/*val popularMoviesObservable = retrofitClient
-    .getMovieService()
-    .getPopularMovies(API_KEY)
-    .subscribeOn(Schedulers.io())
-    .observeOn(AndroidSchedulers.mainThread())
-    .subscribe(
-        { Log.v("TEST", "Success: $it") },
-        { Log.v("TEST", "Error: $it") }
-    )
-
-    */
