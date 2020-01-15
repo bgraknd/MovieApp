@@ -1,25 +1,29 @@
 package com.bugra.movieapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bugra.movieapp.databinding.FragmentMoviesBinding
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MoviesFragment : Fragment() {
 
     private lateinit var binding: FragmentMoviesBinding
 
-    val apiDataSource = ApiDataSource()
-
     private val popularMoviesAdapter = PopularMoviesAdapter()
     private val nowPlayingMoviesAdapter = PopularMoviesAdapter()
+
+    private lateinit var viewModel: MoviesFragmentViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(MoviesFragmentViewModel::class.java)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +38,7 @@ class MoviesFragment : Fragment() {
               binding.recyclerViewPopularMovies.layoutManager =
                   LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
       */
+
         binding.recyclerViewPopularMovies.adapter = popularMoviesAdapter
         binding.recyclerViewNowPlaying.adapter = nowPlayingMoviesAdapter
 
@@ -43,29 +48,12 @@ class MoviesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        fetchMoviePage()
-    }
-
-    @SuppressLint("CheckResult")
-    private fun fetchMoviePage() {
-
-        val popularMoviesObservable = apiDataSource.fetchPopularMovies()
-        val nowPlayingMoviesObservable = apiDataSource.fetchNowPlayingMovies()
-
-        Observable.combineLatest(
-            popularMoviesObservable,
-            nowPlayingMoviesObservable,
-            MoviePageCombiner()
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                popularMoviesAdapter.setMovieList(it.getPopularMovies())
-                nowPlayingMoviesAdapter.setMovieList(it.getNowPlayingMovies())
-
-                binding.viewState = it
-                binding.executePendingBindings()
-            }
+        viewModel.getMoviesLiveData().observe(this, Observer {
+            popularMoviesAdapter.setMovieList(it.getPopularMovies())
+            nowPlayingMoviesAdapter.setMovieList(it.getNowPlayingMovies())
+            binding.viewState = it
+            binding.executePendingBindings()
+        })
     }
 
     companion object {
