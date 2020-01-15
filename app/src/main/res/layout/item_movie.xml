@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.bugra.movieapp.MoviesItemViewState" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -19,14 +26,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:url="@{viewState.popularMoviePoster}"
             tools:src="@drawable/ic_launcher_background" />
 
         <TextView
-            android:id="@+id/txtMovieTitle"
+            android:id="@+id/textViewMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:text="@{viewState.popularMovieTitle}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageViewFilmPoster"
             app:layout_constraintStart_toStartOf="parent"
