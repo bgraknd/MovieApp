@@ -14,7 +14,8 @@ class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItem
     private var movieList = arrayListOf<PopularMovieResults>()
 
     fun setMovieList(movieList: List<PopularMovieResults>) {
-        this.movieList = movieList as ArrayList<PopularMovieResults>
+        this.movieList.clear()
+        this.movieList.addAll(movieList)
         notifyDataSetChanged()
     }
 
@@ -29,9 +30,10 @@ class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItem
     class MovieItemViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: PopularMovieResults) {
-            binding.txtMovieTitle.text = movie.title
-            Picasso.get().load(movie.poster_path).into(binding.imageViewFilmPoster)
+        fun bind(movieItem: PopularMovieResults) {
+            binding.txtMovieTitle.text = movieItem.title
+            Picasso.get().load("https://image.tmdb.org/t/p/w500" + movieItem.poster_path)
+                .into(binding.imageViewFilmPoster)
         }
 
         companion object {
