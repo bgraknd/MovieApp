@@ -1,14 +1,14 @@
 package com.bugra.movieapp
 
-import com.bugra.movieapp.model.PopularMovies
+import com.bugra.movieapp.model.MovieResults
 import io.reactivex.functions.BiFunction
 
 class MoviePageCombiner :
-    BiFunction<Resource<PopularMovies>, Resource<PopularMovies>/*TODO:nowPlaying*/, MoviesFragmentViewState> {
+    BiFunction<Resource<List<MovieResults>>, Resource<List<MovieResults>>/*TODO:nowPlaying*/, MoviesFragmentViewState> {
 
     override fun apply(
-        popularMovies: Resource<PopularMovies>,
-        nowPlayingMovies: Resource<PopularMovies>
+        popularMovies: Resource<List<MovieResults>>,
+        nowPlayingMovies: Resource<List<MovieResults>>
         //TODO: nowPlaying
     ): MoviesFragmentViewState {
         return MoviesFragmentViewState(popularMovies, nowPlayingMovies)

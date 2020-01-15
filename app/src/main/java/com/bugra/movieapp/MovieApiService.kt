@@ -1,19 +1,18 @@
 package com.bugra.movieapp
 
-import com.bugra.movieapp.model.PopularMovies
+import com.bugra.movieapp.model.MovieResults
 import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface MovieApiService {
-    @GET("movie/popular")
+    @GET("popularmovies.json")
     fun getPopularMovies(
-        @Query("api_key") apiKey: String
-    ): Single<PopularMovies>
+        //   @Query("api_key") apiKey: String
+    ): Single<List<MovieResults>>
 
-    @GET("movie/now_playing")
+    @GET("popularmovies.json")
     fun getNowPlayingMovies(
-        @Query("api_key") apiKey: String
-    ): Single<PopularMovies>
+        //   @Query("api_key") apiKey: String
+    ): Single<List<MovieResults>>
     //TODO: nowPlaying
 }
