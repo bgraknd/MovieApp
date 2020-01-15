@@ -34,15 +34,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPopularMovies" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progressBarPopularMovies"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerViewPopularMovies"
             app:layout_constraintEnd_toEndOf="@id/recyclerViewPopularMovies"
             app:layout_constraintStart_toStartOf="@+id/recyclerViewPopularMovies"
@@ -73,15 +76,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewNowPlaying" />
 
         <ProgressBar
-            android:id="@+id/progressBar2"
+            android:id="@+id/progressBarNowPlayingMovies"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerViewNowPlaying"
             app:layout_constraintEnd_toEndOf="@+id/recyclerViewNowPlaying"
             app:layout_constraintStart_toStartOf="@+id/recyclerViewNowPlaying"

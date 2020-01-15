@@ -1,5 +1,6 @@
 package com.bugra.movieapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bugra.movieapp.Status.*
+import com.bugra.movieapp.Status.LOADING
+import com.bugra.movieapp.Status.SUCCESS
 import com.bugra.movieapp.databinding.FragmentMoviesBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,13 +30,13 @@ class MoviesFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false)
 
-        // added layout manager
-        binding.recyclerViewNowPlaying.layoutManager =
-            LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+        /*      // added layout manager
+              binding.recyclerViewNowPlaying.layoutManager =
+                  LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
 
-        binding.recyclerViewPopularMovies.layoutManager =
-            LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
-
+              binding.recyclerViewPopularMovies.layoutManager =
+                  LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+      */
         binding.recyclerViewPopularMovies.adapter = popularMoviesAdapter
         binding.recyclerViewNowPlaying.adapter = nowPlayingMoviesAdapter
 
@@ -48,6 +49,7 @@ class MoviesFragment : Fragment() {
         fetchMoviePage()
     }
 
+    @SuppressLint("CheckResult")
     private fun fetchMoviePage() {
 
         val popularMoviesObservable = apiDataSource.fetchPopularMovies()
@@ -76,13 +78,15 @@ class MoviesFragment : Fragment() {
                     "Succes Data : ",
                     moviesFragmentViewState.popularMovies.data!!.results!!.toString()
                 )
+                binding.progressBarPopularMovies.visibility = View.GONE
                 popularMoviesAdapter.setMovieList(moviesFragmentViewState.popularMovies.data.results!!)
             }
             LOADING -> {
-
+                binding.progressBarPopularMovies.visibility = View.VISIBLE
             }
-            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.popularMovies.message.toString())
+/*            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.popularMovies.message.toString())
             else -> Log.e("Else Case : ", "Wrong Section")
+ */
         }
         when (moviesFragmentViewState.nowPlayingMovies.status) {
             SUCCESS -> {
@@ -90,13 +94,15 @@ class MoviesFragment : Fragment() {
                     "Succes Data : ",
                     moviesFragmentViewState.nowPlayingMovies.data!!.results!!.toString()
                 )
+                binding.progressBarNowPlayingMovies.visibility = View.GONE
                 nowPlayingMoviesAdapter.setMovieList(moviesFragmentViewState.nowPlayingMovies.data.results!!)
             }
             LOADING -> {
-
+                binding.progressBarNowPlayingMovies.visibility = View.VISIBLE
             }
-            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.nowPlayingMovies.message.toString())
+/*            ERROR -> Log.e("ERROR : ", moviesFragmentViewState.nowPlayingMovies.message.toString())
             else -> Log.e("Else Case : ", "Wrong Section")
+ */
         }
     }
 
