@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.google.gms.google-services'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -20,7 +22,7 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField("String", "API_URL", '"https://api.themoviedb.org/3/"')
+            buildConfigField("String", "API_URL", '"https://movieapp-e7ad3.firebaseio.com/"')
             buildConfigField("String", "IMAGE_URL", '"https://image.tmdb.org/t/p/w500"')
             buildConfigField("String", "API_KEY", '"41b5b8dd8824bad3f46b5ca9f1df058c"')
             minifyEnabled false
@@ -60,8 +62,12 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //RxJava & RxAndroid
+    //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.13'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
+    //Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.1.0"
 }

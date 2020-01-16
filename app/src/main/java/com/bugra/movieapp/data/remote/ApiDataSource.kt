@@ -1,7 +1,7 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.data.remote
 
-import com.bugra.movieapp.BuildConfig.API_KEY
-import com.bugra.movieapp.model.PopularMovies
+import com.bugra.movieapp.data.Resource
+import com.bugra.movieapp.data.model.MovieResults
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -9,14 +9,14 @@ class ApiDataSource {
 
     val retrofitClient = RetrofitClient()
 
-    fun fetchPopularMovies(): Observable<Resource<PopularMovies>> {
+    fun fetchPopularMovies(): Observable<Resource<List<MovieResults>>> {
         return Observable.create { emitter ->
 
             emitter.onNext(Resource.loading())
 
             retrofitClient
                 .getMovieService()
-                .getPopularMovies(API_KEY)
+                .getPopularMovies()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { movieList ->
@@ -24,13 +24,17 @@ class ApiDataSource {
                         emitter.onComplete()
                     },
                     { error ->
-                        emitter.onNext(Resource.error(error.message ?: ""))
+                        emitter.onNext(
+                            Resource.error(
+                                error.message ?: ""
+                            )
+                        )
                         emitter.onComplete()
                     })
         }
     }
 
-    fun fetchNowPlayingMovies(): Observable<Resource<PopularMovies>>
+    fun fetchNowPlayingMovies(): Observable<Resource<List<MovieResults>>>
     //TODO nowPlaying
     {
         return Observable.create { emitter ->
@@ -39,7 +43,7 @@ class ApiDataSource {
 
             retrofitClient
                 .getMovieService()
-                .getNowPlayingMovies(API_KEY)
+                .getNowPlayingMovies()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     { movieList ->
@@ -47,7 +51,11 @@ class ApiDataSource {
                         emitter.onComplete()
                     },
                     { error ->
-                        emitter.onNext(Resource.error(error.message ?: ""))
+                        emitter.onNext(
+                            Resource.error(
+                                error.message ?: ""
+                            )
+                        )
                         emitter.onComplete()
                     })
         }

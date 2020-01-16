@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.bugra.movieapp.ui.movies.MoviesFragmentViewState" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MoviesFragment">
+        tools:context=".ui.movies.MoviesFragment">
 
         <TextView
             android:id="@+id/textViewPopularMovies"
@@ -49,7 +55,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/recyclerViewPopularMovies"
             app:layout_constraintEnd_toEndOf="@id/recyclerViewPopularMovies"
             app:layout_constraintStart_toStartOf="@+id/recyclerViewPopularMovies"
+            android:visibility="@{viewState.popularMoviesLoadingVisibility}"
             app:layout_constraintTop_toTopOf="@+id/recyclerViewPopularMovies" />
+
 
         <TextView
             android:id="@+id/textViewNowPlaying"
@@ -91,6 +99,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/recyclerViewNowPlaying"
             app:layout_constraintEnd_toEndOf="@+id/recyclerViewNowPlaying"
             app:layout_constraintStart_toStartOf="@+id/recyclerViewNowPlaying"
+            android:visibility="@{viewState.nowPlayingMoviesLoadingVisibility}"
             app:layout_constraintTop_toTopOf="@+id/recyclerViewNowPlaying" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.data
 
 enum class Status {
     SUCCESS,

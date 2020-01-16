@@ -1,9 +1,10 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.bugra.movieapp.R
 import com.bugra.movieapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
