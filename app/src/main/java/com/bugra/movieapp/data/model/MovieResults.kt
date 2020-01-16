@@ -1,4 +1,4 @@
-package com.bugra.movieapp.model
+package com.bugra.movieapp.data.model
 
 data class MovieResults(
     var poster_path: String?,

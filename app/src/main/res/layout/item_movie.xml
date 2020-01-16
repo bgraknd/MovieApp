@@ -7,7 +7,7 @@
 
         <variable
             name="viewState"
-            type="com.bugra.movieapp.MoviesItemViewState" />
+            type="com.bugra.movieapp.ui.movies.MoviesItemViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

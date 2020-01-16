@@ -1,6 +1,6 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.movies
 
-import com.bugra.movieapp.model.MovieResults
+import com.bugra.movieapp.data.model.MovieResults
 
 class MoviesItemViewState(val movie: MovieResults) {
 

@@ -1,9 +1,11 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.main
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.bugra.movieapp.R
+import com.bugra.movieapp.ui.movies.MoviesFragment
 
 class MainPagerAdapter(context: Context, fragmentManager: FragmentManager, behavior: Int) :
     FragmentStatePagerAdapter(fragmentManager, behavior) {

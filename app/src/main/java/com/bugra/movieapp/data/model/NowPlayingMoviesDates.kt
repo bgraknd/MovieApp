@@ -1,4 +1,4 @@
-package com.bugra.movieapp.model
+package com.bugra.movieapp.data.model
 
 data class NowPlayingMoviesDates(
     var maximum: String?,

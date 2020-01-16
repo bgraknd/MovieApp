@@ -7,13 +7,13 @@
 
         <variable
             name="viewState"
-            type="com.bugra.movieapp.MoviesFragmentViewState" />
+            type="com.bugra.movieapp.ui.movies.MoviesFragmentViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MoviesFragment">
+        tools:context=".ui.movies.MoviesFragment">
 
         <TextView
             android:id="@+id/textViewPopularMovies"

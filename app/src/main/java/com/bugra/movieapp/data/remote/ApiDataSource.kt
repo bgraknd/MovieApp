@@ -1,6 +1,7 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.data.remote
 
-import com.bugra.movieapp.model.MovieResults
+import com.bugra.movieapp.data.Resource
+import com.bugra.movieapp.data.model.MovieResults
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -23,7 +24,11 @@ class ApiDataSource {
                         emitter.onComplete()
                     },
                     { error ->
-                        emitter.onNext(Resource.error(error.message ?: ""))
+                        emitter.onNext(
+                            Resource.error(
+                                error.message ?: ""
+                            )
+                        )
                         emitter.onComplete()
                     })
         }
@@ -46,7 +51,11 @@ class ApiDataSource {
                         emitter.onComplete()
                     },
                     { error ->
-                        emitter.onNext(Resource.error(error.message ?: ""))
+                        emitter.onNext(
+                            Resource.error(
+                                error.message ?: ""
+                            )
+                        )
                         emitter.onComplete()
                     })
         }

@@ -1,4 +1,4 @@
-package com.bugra.movieapp.model
+package com.bugra.movieapp.data.model
 
 data class NowPlayingMovies(
     var results: List<NowPlayingMovieResults>?,

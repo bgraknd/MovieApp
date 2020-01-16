@@ -1,6 +1,6 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.data.remote
 
-import com.bugra.movieapp.model.MovieResults
+import com.bugra.movieapp.data.model.MovieResults
 import io.reactivex.Single
 import retrofit2.http.GET
 

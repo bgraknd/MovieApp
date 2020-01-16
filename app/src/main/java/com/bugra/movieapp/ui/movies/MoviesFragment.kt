@@ -1,4 +1,4 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bugra.movieapp.R
 import com.bugra.movieapp.databinding.FragmentMoviesBinding
 
 class MoviesFragment : Fragment() {
@@ -29,7 +30,10 @@ class MoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_movies, container, false
+        )
 
         /*      // added layout manager
               binding.recyclerViewNowPlaying.layoutManager =

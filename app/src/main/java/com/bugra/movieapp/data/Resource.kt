@@ -1,9 +1,13 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.data
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
         fun <T> success(data: T?): Resource<T> {
-            return Resource(Status.SUCCESS, data, null)
+            return Resource(
+                Status.SUCCESS,
+                data,
+                null
+            )
         }
 
         fun <T> error(msg: String): Resource<T> {
@@ -11,7 +15,11 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
         }
 
         fun <T> loading(): Resource<T> {
-            return Resource(Status.LOADING, null, null)
+            return Resource(
+                Status.LOADING,
+                null,
+                null
+            )
         }
     }
 }

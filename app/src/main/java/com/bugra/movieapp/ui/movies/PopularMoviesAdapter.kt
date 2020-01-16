@@ -1,11 +1,12 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bugra.movieapp.R
+import com.bugra.movieapp.data.model.MovieResults
 import com.bugra.movieapp.databinding.ItemMovieBinding
-import com.bugra.movieapp.model.MovieResults
 
 
 class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItemViewHolder>() {
@@ -19,7 +20,9 @@ class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder =
-        MovieItemViewHolder.create(parent)
+        MovieItemViewHolder.create(
+            parent
+        )
 
     override fun getItemCount(): Int = movieList.size
 
@@ -39,7 +42,8 @@ class PopularMoviesAdapter : RecyclerView.Adapter<PopularMoviesAdapter.MovieItem
         companion object {
             fun create(parent: ViewGroup): MovieItemViewHolder {
                 val binding = DataBindingUtil.inflate<ItemMovieBinding>(
-                    LayoutInflater.from(parent.context), R.layout.item_movie, parent, false
+                    LayoutInflater.from(parent.context),
+                    R.layout.item_movie, parent, false
                 )
                 return MovieItemViewHolder(binding)
             }

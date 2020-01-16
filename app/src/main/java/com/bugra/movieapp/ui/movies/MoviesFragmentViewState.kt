@@ -1,8 +1,9 @@
-package com.bugra.movieapp
+package com.bugra.movieapp.ui.movies
 
 import android.view.View
-import com.bugra.movieapp.Status.LOADING
-import com.bugra.movieapp.model.MovieResults
+import com.bugra.movieapp.data.Resource
+import com.bugra.movieapp.data.Status.LOADING
+import com.bugra.movieapp.data.model.MovieResults
 
 data class MoviesFragmentViewState(
     private val popularMovies: Resource<List<MovieResults>>,

@@ -1,4 +1,4 @@
-package com.bugra.movieapp.model
+package com.bugra.movieapp.ui
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

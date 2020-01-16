@@ -1,4 +1,4 @@
-package com.bugra.movieapp.model
+package com.bugra.movieapp.data.model
 
 data class NowPlayingMovieResults(
     var popularity: Float?,
